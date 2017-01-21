@@ -1,6 +1,9 @@
 # iflyasrdemo
 windows demo for filytek sms asr
 
+## depends on
+iflytek windows speech sdk
+
 ## function
 0. 识别
 1. 录音
