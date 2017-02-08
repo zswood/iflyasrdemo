@@ -53,8 +53,8 @@ int iflyasr::create_inst(){
 		release_inst();
 	}
 	int ret = 0;
-	//std::string asr_params = "sub=iat,domain=iat,language=zh_cn,accent=mandarin,sample_rate=16000,aue=speex-wb";
-	std::string asr_params = "sub=iat,domain=cmn-hans-cn,language=zh_cn,accent=mandarin,sample_rate=16000,aue=speex-wb,svad=0";
+	std::string asr_params = "sub=iat,domain=iat,language=zh_cn,accent=mandarin,sample_rate=16000,aue=speex-wb";
+	//std::string asr_params = "sub=iat,domain=cmn-hans-cn,language=zh_cn,accent=mandarin,sample_rate=16000,aue=speex-wb,svad=0";
 	asr_sess_hdl_ = asrfunc_create_(NULL, asr_params.c_str(), &ret);
 	if (asr_sess_hdl_ == NULL){
 		printf("iflyasr::create_inst | call asr sessionbegin fail with err:%d\n", ret);

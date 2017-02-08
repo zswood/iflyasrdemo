@@ -1,6 +1,10 @@
 #include "iflyspeech.h"
 #include "iflyrecord.h"
+#include "encode.h"
+#include "format.h"
 
+encode_util encode_tool;
+iflydata_parser	parser;
 
 void CALLBACK waveInProc(HWAVEIN hwi, UINT uMsg, DWORD_PTR dwInstance,DWORD_PTR dwParam1,DWORD_PTR dwParam2)
 {
@@ -16,16 +20,28 @@ void CALLBACK waveInProc(HWAVEIN hwi, UINT uMsg, DWORD_PTR dwInstance,DWORD_PTR 
 
 		if (result_exist){
 			std::string asr_result;
+			std::string gb_result;
 			bool complete =  false;
 			demo->asr_inst()->query_result(asr_result, complete);
-			printf("%s\n", asr_result.c_str());
+			if (!asr_result.empty()){
+
+				std::string plain_result;
+				if (encode_tool.convert(asr_result, gb_result, et_utf8, et_gb2312)){
+					printf("character encode convert fail, utf8:%s\n", asr_result.c_str());
+				}else if (parser.parse(gb_result, ft_json, plain_result)){
+					printf(" parse format data fail, data:%s\n", gb_result.c_str());
+				}else {
+					printf("%s", plain_result.c_str());
+				}
+			}
 			if (complete){
+				printf("\n");
+				printf("recv final asr result and finish record!\n");
 				demo->asr_inst()->release_inst();
 				// end the recorder;
 				waveInStop(hwi);
 			}
 		}
-		printf("cap %d \n",capnum++);
 		
 	}else if (uMsg == WIM_CLOSE){
 		finish_stream = true;

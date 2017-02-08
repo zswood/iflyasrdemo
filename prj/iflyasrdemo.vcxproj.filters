@@ -41,5 +41,11 @@
     <ClCompile Include="iflyrecord.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="encode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="format.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
