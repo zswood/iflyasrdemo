@@ -2,7 +2,7 @@
 windows demo for filytek sms asr
 
 ## depends on
-iflytek windows speech sdk
+demo needs iflytek windows speech sdk, you can get the asr sdk from iflytek cloud platform's website:http://www.xfyun.cn/.
 
 ## function
 0. 识别
